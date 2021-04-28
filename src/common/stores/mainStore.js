@@ -1,30 +1,26 @@
-import { observable, action, computed, toJS } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 import API from "../config/api";
 
-const FETCH_ACTUAL_NEWS_URL = "/posts/actual";
+const QUERY_URL = "/search.php?s=";
 
 class MainStore {
-  // constructor() {
-  //   const singleton = InjectSinglePost.getInstance();
-  //   singleton.setPost();
-  // }
-  //
-  // @observable news = [];
-  //
-  // @action
-  // fetchNews = async () => {
-  //   const res = await api.get(FETCH_ACTUAL_NEWS_URL);
-  //   const { data } = res.data;
-  //   const singleton = InjectSinglePost.getInstance();
-  //   const resultData = await singleton.getPost(data, 5);
-  //   this.setNews(resultData);
-  // };
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  coctails = [];
+
+  fetchCoctails = async request => {
+    const res = await API.get(`${QUERY_URL}${request}`);
+    const { data } = res;
+    this.setCoctails(data.drinks);
+  };
   //
   // @action
-  // setNews = news => {
-  //   this.news = news;
-  // };
+  setCoctails = coctails => {
+    this.coctails = coctails;
+  };
   //
   // @computed get newsList() {
   //   return toJS(this.news);
@@ -32,22 +28,3 @@ class MainStore {
 }
 
 export default new MainStore();
-
-// class Timer {
-//     start = Date.now()
-//     current = Date.now()
-//
-//     get elapsedTime() {
-//         return this.current - this.start + "milliseconds"
-//     }
-//
-//     tick() {
-//         this.current = Date.now()
-//     }
-// }
-// decorate(Timer, {
-//     start: observable,
-//     current: observable,
-//     elapsedTime: computed,
-//     tick: action
-// })

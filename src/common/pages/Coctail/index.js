@@ -8,16 +8,10 @@ import CocktailsBlock from "../../components/CocktailsBlock";
 
 import styles from "./styles.css";
 
-const MainPage = inject("MainStore")(
+const CoctailPage = inject("MainStore")(
   observer(({ MainStore }) => {
-    return (
-      <>
-        <Menu />
-        <Search />
-        <CocktailsBlock />
-      </>
-    );
+    return <div>Коктейль</div>;
   })
 );
 
-export default MainPage;
+export default CoctailPage;
