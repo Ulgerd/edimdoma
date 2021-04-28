@@ -1,9 +1,11 @@
 .burgerWrapper {
   position: absolute;
   top: 0;
-  z-index: 1000;
+
   margin-top: 20px;
   margin-left: 20px;
+
+  z-index: 1000;
 }
 
 .burgerWrapper svg{
@@ -12,18 +14,23 @@
 }
 
 .mobileMenuWrapper {
-  /* visibility: hidden; */
   position: absolute;
-  transition: all 0.2s ease-out;
-  height: 300px;
-  width: 50%;
-  z-index: 1000;
-
   left: -300px;
+
+  transition: all 0.2s ease-out;
+
+  width: 50%;
+  height: 300px;
+
+  z-index: 1000;
 }
 
 .mobileMenuWrapper.mobileMenuVisible {
-  /* visibility: visible; */
   left: 0;
+
   transition: all 0.2s ease-out;
+}
+
+.menuSplitter {
+  cursor: default;
 }

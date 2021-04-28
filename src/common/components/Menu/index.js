@@ -1,15 +1,15 @@
 import React, { useState } from "react";
+import { inject, observer } from "mobx-react";
+import cx from "classnames";
+
 import { Menu } from "antd";
-import "antd/dist/antd.css";
 import {
   MailOutlined,
   AppstoreOutlined,
   SettingOutlined,
   MenuOutlined
 } from "@ant-design/icons";
-import { inject, observer } from "mobx-react";
-
-import cx from "classnames";
+import "antd/dist/antd.css";
 
 import "./styles.css";
 
@@ -67,11 +67,15 @@ const MainPage = inject("MainStore")(
           <Menu.Item key="tab1" icon={<MailOutlined />}>
             Пункт 1
           </Menu.Item>
-          <span>{"|"}</span>
+          <Menu.Item key={"splitter1"} disabled className={"menuSplitter"}>
+            {"|"}
+          </Menu.Item>
           <Menu.Item key="tab2" icon={<AppstoreOutlined />}>
             Пункт 2
           </Menu.Item>
-          <span>{"|"}</span>
+          <Menu.Item key={"splitter2"} disabled className={"menuSplitter"}>
+            {"|"}
+          </Menu.Item>
           <Menu.Item key="tab3" icon={<SettingOutlined />}>
             Пункт 3
           </Menu.Item>

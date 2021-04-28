@@ -11,3 +11,10 @@
   width: 20%;
   margin-left: 20px;
 }
+
+@media (max-width: 480px) {
+  .searchButton {
+    width: unset;
+    margin-left: 2px;
+  }
+}

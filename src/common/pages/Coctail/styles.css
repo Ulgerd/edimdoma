@@ -1,0 +1,70 @@
+.coctailPageHeader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.coctailPageBackButton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 20px;
+}
+
+.coctailPageBackButton svg {
+  width: 30px;
+  height: 30px;
+}
+
+.coctailPageNewSearchButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+}
+
+.coctailPageNewSearchButton svg {
+  width: 30px;
+  height: 30px;
+}
+
+.coctailPageInfoWrapper {
+  margin: 20px;
+}
+
+.coctailImage {
+  max-width: 25%;
+  display: flex;
+  margin: 0 auto;
+}
+
+.coctailPageRow {
+  margin-top: 40px;
+  overflow: hidden;
+}
+
+.coctailPageRow h4 {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .coctailImage {
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .coctailPageInfoWrapper {
+    margin: 0;
+  }
+
+  .ingridientImage {
+    max-width:75px;
+    max-height:75px;
+  }
+
+  .coctailPageRow > p, .coctailPageRow > h4, .coctailPageRow > h2 {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
