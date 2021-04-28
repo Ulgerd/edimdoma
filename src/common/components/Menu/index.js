@@ -8,7 +8,8 @@ import {
 } from "@ant-design/icons";
 import { inject, observer } from "mobx-react";
 
-import logo from "../../../assets/logo.png";
+import Logo from "../Logo";
+
 import styles from "./styles.css";
 
 const MainPage = inject("MainStore")(
@@ -21,7 +22,7 @@ const MainPage = inject("MainStore")(
 
     return (
       <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
-        <img src={logo} alt="logo" width="40px" height="40px" />
+        <Logo />
         <Menu.Item key="tab1" icon={<MailOutlined />}>
           Пункт 1
         </Menu.Item>

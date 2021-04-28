@@ -2,7 +2,8 @@ import { makeAutoObservable } from "mobx";
 
 import API from "../config/api";
 
-const QUERY_URL = "/search.php?s=";
+const FETCH_URL_BY_NAME = "/search.php?s=";
+const FETCH_URL_BY_ID = "/lookup.php?i=";
 
 class MainStore {
   constructor() {
@@ -10,21 +11,28 @@ class MainStore {
   }
 
   coctails = [];
+  activeCoctail = {};
 
   fetchCoctails = async request => {
-    const res = await API.get(`${QUERY_URL}${request}`);
+    const res = await API.get(`${FETCH_URL_BY_NAME}${request}`);
     const { data } = res;
     this.setCoctails(data.drinks);
   };
-  //
-  // @action
+
+  fetchCoctailById = async drinkId => {
+    const res = await API.get(`${FETCH_URL_BY_ID}${drinkId}`);
+    const { data } = res;
+    console.log(data.drinks);
+    this.setActiveCoctail(data.drinks[0]);
+  };
+
   setCoctails = coctails => {
     this.coctails = coctails;
   };
-  //
-  // @computed get newsList() {
-  //   return toJS(this.news);
-  // }
+
+  setActiveCoctail = coctail => {
+    this.activeCoctail = coctail;
+  };
 }
 
 export default new MainStore();

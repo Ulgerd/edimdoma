@@ -1,28 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Divider, Button } from "antd";
 import { inject, observer } from "mobx-react";
 import { Link } from "react-router-dom";
 
-import logo from "../../../assets/logo.png";
 import styles from "./styles.css";
-
-const { Meta } = Card;
 
 const CoctailsBlock = inject("MainStore")(
   observer(({ MainStore }) => {
     const { coctails } = MainStore;
 
-    console.log(coctails);
-    const style = { background: "#0092ff", padding: "8px 0" };
-
     return (
       <>
         <Divider orientation="left">Результаты поиска</Divider>
         <div classname={styles.row}>
-          {coctails.map(coctail => {
+          {coctails?.map(coctail => {
             const { strDrinkThumb, strDrink, strCategory, idDrink } = coctail;
             return (
-              <Link to={`/card/${idDrink}`} className={styles.imageWrap}>
+              <Link to={`/card/${idDrink}`}>
                 <Card
                   hoverable
                   style={{ width: 240 }}
@@ -30,12 +24,13 @@ const CoctailsBlock = inject("MainStore")(
                 >
                   <h2>{strDrink}</h2>
                   <p>{strCategory}</p>
-                  <Button>Посмотреть</Button>
+                  <Link to={`/card/${idDrink}`}>
+                    <Button>Посмотреть</Button>
+                  </Link>
                 </Card>
               </Link>
             );
           })}
-          }
         </div>
       </>
     );
