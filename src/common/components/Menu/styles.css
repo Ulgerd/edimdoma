@@ -1,0 +1,29 @@
+.burgerWrapper {
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.burgerWrapper svg{
+  width: 30px;
+  height: 30px;
+}
+
+.mobileMenuWrapper {
+  /* visibility: hidden; */
+  position: absolute;
+  transition: all 0.2s ease-out;
+  height: 300px;
+  width: 50%;
+  z-index: 1000;
+
+  left: -300px;
+}
+
+.mobileMenuWrapper.mobileMenuVisible {
+  /* visibility: visible; */
+  left: 0;
+  transition: all 0.2s ease-out;
+}

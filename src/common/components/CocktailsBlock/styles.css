@@ -1,0 +1,11 @@
+.coctailsBlock {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.coctailCard {
+  display: flex;
+  justify-content: center;
+  flex: 1 0 17%;
+  margin: 5px;
+}

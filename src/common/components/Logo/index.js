@@ -6,7 +6,7 @@ import styles from "./styles.css";
 
 const Logo = inject("MainStore")(
   observer(props => {
-    return <img src={logo} alt="logo" width="40px" height="40px" />;
+    return <img src={logo} alt="logo" width="80px" height="80px" />;
   })
 );
 

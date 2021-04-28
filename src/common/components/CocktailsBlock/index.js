@@ -12,11 +12,15 @@ const CoctailsBlock = inject("MainStore")(
     return (
       <>
         <Divider orientation="left">Результаты поиска</Divider>
-        <div classname={styles.row}>
+        <div className="coctailsBlock">
           {coctails?.map(coctail => {
             const { strDrinkThumb, strDrink, strCategory, idDrink } = coctail;
             return (
-              <Link to={`/card/${idDrink}`}>
+              <Link
+                to={`/card/${idDrink}`}
+                className="coctailCard"
+                key={idDrink}
+              >
                 <Card
                   hoverable
                   style={{ width: 240 }}

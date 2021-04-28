@@ -1,6 +1,10 @@
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
 
 import API from "../config/api";
+
+const CancelToken = axios.CancelToken;
+let cancel;
 
 const FETCH_URL_BY_NAME = "/search.php?s=";
 const FETCH_URL_BY_ID = "/lookup.php?i=";
@@ -14,7 +18,11 @@ class MainStore {
   activeCoctail = {};
 
   fetchCoctails = async request => {
-    const res = await API.get(`${FETCH_URL_BY_NAME}${request}`);
+    const res = await API.get(`${FETCH_URL_BY_NAME}${request}`, {
+      cancelToken: new CancelToken(function executor(c) {
+        cancel = c;
+      })
+    });
     const { data } = res;
     this.setCoctails(data.drinks);
   };
@@ -22,8 +30,11 @@ class MainStore {
   fetchCoctailById = async drinkId => {
     const res = await API.get(`${FETCH_URL_BY_ID}${drinkId}`);
     const { data } = res;
-    console.log(data.drinks);
     this.setActiveCoctail(data.drinks[0]);
+  };
+
+  cancelCoctailsFetch = () => {
+    cancel();
   };
 
   setCoctails = coctails => {

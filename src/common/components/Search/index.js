@@ -1,35 +1,63 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { Input, Button } from "antd";
+import { Input, Button, Tooltip } from "antd";
 
-import styles from "./styles.css";
+import "./styles.css";
 
 const Search = inject("MainStore")(
   observer(({ MainStore }) => {
+    const { fetchCoctails, cancelCoctailsFetch } = MainStore;
     const [strLenghtErrVisible, setStrLenghtErrVisibility] = useState(false);
+    const [inputValue, setInputValue] = useState(false);
+
+    let inputTimeout;
 
     const onInputChange = e => {
       const { value } = e.target;
-      const { fetchCoctails } = MainStore;
 
-      let inputTimeout = setTimeout(() => {
-        if (value.lenght < 3) {
+      setInputValue(value);
+      serverRequest(value);
+    };
+
+    const serverRequest = value => {
+      clearTimeout(inputTimeout);
+
+      inputTimeout = setTimeout(() => {
+        if (value.length > 0 && value.length < 3) {
           setStrLenghtErrVisibility(true);
+        } else if (value.length === 0) {
+          setStrLenghtErrVisibility(false);
         } else {
-          if (strLenghtErrVisible) setStrLenghtErrVisibility(true);
+          if (strLenghtErrVisible) setStrLenghtErrVisibility(false);
           fetchCoctails(value);
         }
       }, 750);
     };
 
+    const onSearchClick = () => {
+      cancelCoctailsFetch();
+      fetchCoctails(inputValue);
+    };
+
     return (
       <>
-        <h1>Поиск по названию коктейля</h1>
-        <Input placeholder="Название" onChange={onInputChange} />
-        {strLenghtErrVisible && (
-          <div>Запрос должен содержать более 2 символов</div>
-        )}
-        <Button type="primary">Искать</Button>
+        <h1 className="searchBarHeader">Поиск по названию коктейля</h1>
+        <div className="searchBarWrapper">
+          <Tooltip
+            placement="topLeft"
+            title={"Запрос должен содержать более 2 символов"}
+            visible={strLenghtErrVisible}
+          >
+            <Input placeholder="Название" onChange={onInputChange} />
+          </Tooltip>
+          <Button
+            type="primary"
+            className="searchButton"
+            onClick={onSearchClick}
+          >
+            Искать
+          </Button>
+        </div>
       </>
     );
   })
